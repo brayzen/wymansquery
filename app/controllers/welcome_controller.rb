@@ -3,8 +3,8 @@ class WelcomeController < ApplicationController
   require 'time'
 
   def index
-    puts "$$$$$$$$$$$$"
-    puts "query_params: #{query_params}"
+    puts "$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    puts "query__params: #{query_params}"
     puts "$$$$$$$$$$$$"
     if query_params
       format_dates
@@ -37,6 +37,9 @@ class WelcomeController < ApplicationController
   end
 
   def query_params
+    puts "in qParams function:::::::::::::::"
+    puts "query_object: #{params[:query]}"
+    puts "in qParams function:::::::::::::::"
     if params["query"]
       params.require(:query).permit(:queery, :limit, :"date_from(1i)", :"date_from(2i)", :"date_from(3i)", :"date_to(1i)", :"date_to(2i)", :"date_to(3i)")
     end
