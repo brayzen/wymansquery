@@ -1,0 +1,22 @@
+<h1>Query#show</h1>
+<p>Find me in app/views/query/show.html.erb</p>
+<%= link_to 'Make another query', '/' %>
+
+
+
+  <div class="table">
+    <div class="row">
+    <% @keys.each do |key| %>
+        <div class="cell">
+          key
+        </div>
+    </div>
+      <% @matches.each do |match| %>
+      <div class="row">
+        <div class="cell">
+          match[key]
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+  </div>

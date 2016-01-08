@@ -1,0 +1,55 @@
+<h3> Enter Query </h3>
+<%= form_for :query, url: {action: "index"} do |f| %>
+  <%= f.label :limit %>:
+  <%= f.text_field :limit %><br />
+
+  <%= f.label 'query' %>:
+  <%= f.text_field :queery %><br />
+
+  <%= f.label :date_from %>:
+  <%= f.date_select :date_from %><br />
+
+  <%= f.label :date_to %>:
+  <%= f.date_select :date_to, placeholder: "default set to present day" %><br />
+  <%= f.submit "Get Data" %>
+<% end %>
+
+<hr>
+<br />
+  <table class="table">
+    <tr class="row">
+      <td class="cell">
+        <% if @keys[0] %>
+          <strong>#<strong>
+        <% end %>
+      </td>
+    <% @keys.each do |key| %>
+        <td class="cell">
+          <strong><%= key %></strong>
+        </td>
+    <% end %>
+    </tr>
+
+    <%count = 1 %>
+    <% @matches.each do |match| %>
+      <tr class="row">
+        <td class="cell">
+          <%= count %>
+        <% @keys.each do |key| %>
+          <td class="cell">
+            <% if key == "Published" || key == "Crawled" %>
+              <%= Time.parse(match[key]).strftime("%m-%d-%Y") %>
+            <% elsif key == "Url" %>
+              <a href=<%=match[key]%>>Visit URL</a>
+            <% elsif key == "Subject" || key == "Text" %>
+              <%= match[key].gsub('[Keyword]','\*K*/').gsub('[/Keyword]', '') %>
+            <% else %>
+              <%= match[key] %>
+            <% end %>
+          </td>
+        <% end %>
+        <% count += 1 %>
+      </tr>
+    <% end %>
+
+  </table>
