@@ -51,5 +51,4 @@ group :development do
 end
 
 group :production do
-  gem 'dotenv-rails'
 end
