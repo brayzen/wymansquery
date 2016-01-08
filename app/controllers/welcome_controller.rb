@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   require 'time'
 
   def index
-    puts "$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    puts "///////////////////////////////////////////////////"
     puts "query__params: #{query_params}"
     puts "$$$$$$$$$$$$"
     if query_params
@@ -34,12 +34,13 @@ class WelcomeController < ApplicationController
   def format_dates
     @date_from = Date.new(query_params[:"date_from(1i)"].to_i, query_params[:"date_from(2i)"].to_i, query_params[:"date_from(3i)"].to_i).to_time.to_i
     @date_to = Date.new(query_params[:"date_to(1i)"].to_i, query_params[:"date_to(2i)"].to_i, query_params[:"date_to(3i)"].to_i).to_time.to_i
+    puts "in qParams function:::::::::::::::"
+    puts "QUERY Object: #{query_params[:"date_to(1i)"]}"
+    puts "!~~~~~~~~#{@date_to}~~~~~~~~!"
+    puts "in qParams function^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
   end
 
   def query_params
-    puts "in qParams function:::::::::::::::"
-    puts "query_object: #{params[:query]}"
-    puts "in qParams function:::::::::::::::"
     if params["query"]
       params.require(:query).permit(:queery, :limit, :"date_from(1i)", :"date_from(2i)", :"date_from(3i)", :"date_to(1i)", :"date_to(2i)", :"date_to(3i)")
     end
