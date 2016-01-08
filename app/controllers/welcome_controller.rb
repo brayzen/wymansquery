@@ -9,7 +9,6 @@ class WelcomeController < ApplicationController
       limit = query_params[:limit]
       api = Rails.application.secrets.wy_api_key
       response = HTTParty.get("http://api.boardreader.com/v1/Boards/Search?&offset=0&limit=#{limit}&query=#{queery}&group_mode=post&filter_date_from=#{@date_from}&filter_date_to=#{@date_to}&sort_mode=default&filter_language=&dn=&body=snippet&mode=full&match_mode=extended&key=#{Rails.application.secrets.wy_api_key}")
-      binding.pry
       if response["Response"]["Matches"]
         matches = response["Response"]["Matches"]["Match"]
         winners = ["Country", "Language", "Crawled", "Url", "Text", "Subject", "Published"]
@@ -35,6 +34,4 @@ class WelcomeController < ApplicationController
       params.require(:query).permit(:queery, :limit, :"date_from(1i)", :"date_from(2i)", :"date_from(3i)", :"date_to(1i)", :"date_to(2i)", :"date_to(3i)")
     end
   end
-
-
 end

@@ -1,7 +1,12 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body{
+  background-color: #BBB;
+}
+
 table {
+  background-color: #FFF;
   text-align: center;
   vertical-align: top;
   tr {
@@ -12,5 +17,15 @@ table {
       word-wrap: normal;
       overflow: hidden;
     }
+  }
+}
+
+form {
+  input{
+    border-radius: 5px;
+  }
+  input.submit{
+    border-radius: 5px;
+    background-color: #ff9900;
   }
 }
