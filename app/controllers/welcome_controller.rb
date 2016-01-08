@@ -7,11 +7,17 @@ class WelcomeController < ApplicationController
       format_dates
       queery = query_params[:queery]
       limit = query_params[:limit]
+      api = Rails.application.secrets.wy_api_key
       response = HTTParty.get("http://api.boardreader.com/v1/Boards/Search?&offset=0&limit=#{limit}&query=#{queery}&group_mode=post&filter_date_from=#{@date_from}&filter_date_to=#{@date_to}&sort_mode=default&filter_language=&dn=&body=snippet&mode=full&match_mode=extended&key=#{Rails.application.secrets.wy_api_key}")
-      matches = response["Response"]["Matches"]["Match"]
-      winners = ["Country", "Language", "Crawled", "Url", "Text", "Subject", "Published"]
-      @keys = matches[0].keys.select{ |winner| winners.include?(winner) }
-      @matches = matches.map { |match| match }
+      binding.pry
+      if response["Response"]["Matches"]
+        matches = response["Response"]["Matches"]["Match"]
+        winners = ["Country", "Language", "Crawled", "Url", "Text", "Subject", "Published"]
+        @keys = matches[0].keys.select{ |winner| winners.include?(winner) }
+        @matches = matches.map { |match| match }
+      else
+        @keys, @matches = [], ['No Matches Found']
+      end
     else
       @keys, @matches = [], []
     end

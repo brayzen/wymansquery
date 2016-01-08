@@ -16,12 +16,11 @@
 
 <hr>
 <br />
+<% if @keys[0] %>
   <table class="table">
     <tr class="row">
       <td class="cell">
-        <% if @keys[0] %>
           <strong>#<strong>
-        <% end %>
       </td>
     <% @keys.each do |key| %>
         <td class="cell">
@@ -30,11 +29,11 @@
     <% end %>
     </tr>
 
-    <%count = 1 %>
+    <% count = 1 %>
     <% @matches.each do |match| %>
       <tr class="row">
         <td class="cell">
-          <%= count %>
+            <%= count %>
         <% @keys.each do |key| %>
           <td class="cell">
             <% if key == "Published" || key == "Crawled" %>
@@ -53,3 +52,8 @@
     <% end %>
 
   </table>
+<% else %>
+
+  <h3 style="color: red"><%= @matches[0] %></h3>
+<% end %>
+
