@@ -3,12 +3,14 @@ class WelcomeController < ApplicationController
   require 'time'
 
   def index
+    puts "$$$$$$$$$$$$"
+    puts "query_params: #{query_params}"
+    puts "$$$$$$$$$$$$"
     if query_params
       format_dates
       queery = query_params[:queery]
       limit = query_params[:limit]
       response = HTTParty.get("http://api.boardreader.com/v1/Boards/Search?&offset=0&limit=#{limit}&query=#{queery}&group_mode=post&filter_date_from=#{@date_from}&filter_date_to=#{@date_to}&sort_mode=default&filter_language=&dn=&body=snippet&mode=full&match_mode=extended&key=#{Rails.application.secrets.wy_api_key}")
-      binding.pry
       puts '%%%%%%%%%%%%%%%%%%%%%%%%%%'
       puts '%%%%%%%%%%%%%%%%%%%%%%%%%%'
       puts response["Response"]["Request"]["key"]
